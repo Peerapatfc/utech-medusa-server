@@ -1,0 +1,46 @@
+name: PR Quality Review
+
+on:
+  pull_request:
+    branches:
+      - main
+      - uat
+      - sit
+      - dev
+
+jobs:
+  code-quality-and-test-unit:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 20
+      matrix:
+        node-version: [20]
+        script: ["yarn test:unit", "yarn test:coverage", "yarn build"]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies and cache node_modules
+        uses: actions/cache@v4
+        id: node-modules-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+
+      - shell: bash
+        run: yarn install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+
+      - name: Run Script 
+        env:
+          NODE_OPTIONS: '--max_old_space_size=8192'
+        run: ${{ matrix.script }}    

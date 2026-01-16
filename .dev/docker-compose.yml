@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:6.2.5
+    command: redis-server --requirepass ${REDIS_PASSWORD:-secret}
+    volumes:
+      - redis:/data
+      # Uncomment below if you have a config file:
+      # - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    networks:
+      - medusa-network
+    container_name: redis
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-secret}
+      HTTP_USER: ${REDIS_CMD_USER:-root}
+      HTTP_PASSWORD: ${REDIS_CMD_PASSWORD:-secret}
+    ports:
+      - ${REDIS_CMD_PORT:-5051}:8081
+    networks:
+      - medusa-network
+    container_name: redis-commander
+
+networks:
+  medusa-network:
+    driver: bridge
+
+volumes:
+  redis:
