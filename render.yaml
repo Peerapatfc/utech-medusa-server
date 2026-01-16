@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: utech-medusa-server
+    name: utech-medusa-server-sgp
     env: node
     region: singapore
     plan: free
