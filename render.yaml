@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: utech-medusa-server
+    env: node
+    plan: free
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: utech-medusa-ds
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: utech-medusa-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: STORE_CORS
+        value: "http://localhost:8000,https://docs.medusajs.com" # Update with your storefront URL
+      - key: ADMIN_CORS
+        value: "http://localhost:7000,http://localhost:7001,https://docs.medusajs.com" # Update with your admin URL
+      - key: AUTH_CORS
+        value: "http://localhost:8000,http://localhost:7000,http://localhost:7001,https://docs.medusajs.com"
+      - key: MEDUSA_BACKEND_URL
+        value: https://utech-medusa-server.onrender.com # Placeholder, will need update after first deploy or use internal DNS if possible but Render replaces this automatically often? actually no, we set it.
+    autoDeploy: false
+
+  - type: redis
+    name: utech-medusa-redis
+    region: singapore
+    plan: free # Note: Render Free Redis is ephemeral (no persistence)
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: [] # Only allow internal connections
+
+databases:
+  - name: utech-medusa-ds
+    databaseName: medusa_db
+    user: medusa
+    plan: free # Note: Render Free Postgres expires after 90 days
+    region: singapore

@@ -1,0 +1,645 @@
+{
+	"namespaces": ["public"],
+	"name": "public",
+	"tables": [
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"path": {
+					"name": "path",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"method": {
+					"name": "method",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"query": {
+					"name": "query",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"body": {
+					"name": "body",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"actor_id": {
+					"name": "actor_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "admin-log-requests",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_admin-log-requests_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_admin-log-requests_deleted_at\" ON \"admin-log-requests\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "admin-log-requests_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		},
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"action": {
+					"name": "action",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"actor_id": {
+					"name": "actor_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"resource_id": {
+					"name": "resource_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"resource_type": {
+					"name": "resource_type",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "admin-logs",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_admin-logs_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_admin-logs_deleted_at\" ON \"admin-logs\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "admin-logs_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		},
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"path": {
+					"name": "path",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"name": {
+					"name": "name",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"method": {
+					"name": "method",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"query": {
+					"name": "query",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"body": {
+					"name": "body",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"actor_id": {
+					"name": "actor_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "hook-logs",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_hook-logs_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_hook-logs_deleted_at\" ON \"hook-logs\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "hook-logs_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		},
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"action": {
+					"name": "action",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"enumItems": ["updated", "reserved", "returned"],
+					"mappedType": "enum"
+				},
+				"from_quantity": {
+					"name": "from_quantity",
+					"type": "integer",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"default": "0",
+					"mappedType": "integer"
+				},
+				"to_quantity": {
+					"name": "to_quantity",
+					"type": "integer",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"default": "0",
+					"mappedType": "integer"
+				},
+				"inventory_item_id": {
+					"name": "inventory_item_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"inventory_level_id": {
+					"name": "inventory_level_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"actor_id": {
+					"name": "actor_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "inventory_item_logs",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_inventory_item_logs_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_inventory_item_logs_deleted_at\" ON \"inventory_item_logs\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "inventory_item_logs_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		},
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"previous_amount": {
+					"name": "previous_amount",
+					"type": "integer",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"default": "0",
+					"mappedType": "integer"
+				},
+				"new_amount": {
+					"name": "new_amount",
+					"type": "integer",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"default": "0",
+					"mappedType": "integer"
+				},
+				"product_id": {
+					"name": "product_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"variant_id": {
+					"name": "variant_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"price_id": {
+					"name": "price_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"actor_id": {
+					"name": "actor_id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "product_pricing_logs",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_product_pricing_logs_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_product_pricing_logs_deleted_at\" ON \"product_pricing_logs\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "product_pricing_logs_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		}
+	],
+	"nativeEnums": {}
+}

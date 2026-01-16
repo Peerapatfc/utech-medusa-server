@@ -1,0 +1,142 @@
+{
+	"namespaces": ["public"],
+	"name": "public",
+	"tables": [
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"name": {
+					"name": "name",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"description": {
+					"name": "description",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"is_store_visible": {
+					"name": "is_store_visible",
+					"type": "boolean",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "true",
+					"mappedType": "boolean"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"custom_rules": {
+					"name": "custom_rules",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"is_new_customer": {
+					"name": "is_new_customer",
+					"type": "boolean",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "false",
+					"mappedType": "boolean"
+				},
+				"promotion_type": {
+					"name": "promotion_type",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'discount'",
+					"mappedType": "text"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "promotion_detail",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_promotion_detail_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_promotion_detail_deleted_at\" ON \"promotion_detail\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "promotion_detail_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		}
+	],
+	"nativeEnums": {}
+}

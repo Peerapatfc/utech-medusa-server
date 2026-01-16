@@ -1,0 +1,304 @@
+{
+	"namespaces": ["public"],
+	"name": "public",
+	"tables": [
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"endpoint": {
+					"name": "endpoint",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"keys": {
+					"name": "keys",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "json"
+				},
+				"expiration_time": {
+					"name": "expiration_time",
+					"type": "integer",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "integer"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "notification_subscription",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_notification_subscription_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_notification_subscription_deleted_at\" ON \"notification_subscription\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "notification_subscription_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		},
+		{
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"subject_line": {
+					"name": "subject_line",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "text"
+				},
+				"description": {
+					"name": "description",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"category": {
+					"name": "category",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'announcement'",
+					"enumItems": [
+						"announcement",
+						"promotion",
+						"discount-code",
+						"update-order",
+						"blog"
+					],
+					"mappedType": "enum"
+				},
+				"image_url": {
+					"name": "image_url",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"recipient_type": {
+					"name": "recipient_type",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'all'",
+					"enumItems": ["all", "targeting", "specific"],
+					"mappedType": "enum"
+				},
+				"customer_group_ids": {
+					"name": "customer_group_ids",
+					"type": "text[]",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "array"
+				},
+				"customer_ids": {
+					"name": "customer_ids",
+					"type": "text[]",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "array"
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'draft'",
+					"enumItems": ["draft", "scheduled", "sent", "expired", "failed"],
+					"mappedType": "enum"
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "jsonb",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "json"
+				},
+				"broadcast_type": {
+					"name": "broadcast_type",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'now'",
+					"enumItems": ["now", "scheduled"],
+					"mappedType": "enum"
+				},
+				"scheduled_at": {
+					"name": "scheduled_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				},
+				"created_by": {
+					"name": "created_by",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"updated_by": {
+					"name": "updated_by",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "text"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "now()",
+					"mappedType": "datetime"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamptz",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "store_notification",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "IDX_store_notification_deleted_at",
+					"columnNames": [],
+					"composite": false,
+					"constraint": false,
+					"primary": false,
+					"unique": false,
+					"expression": "CREATE INDEX IF NOT EXISTS \"IDX_store_notification_deleted_at\" ON \"store_notification\" (deleted_at) WHERE deleted_at IS NULL"
+				},
+				{
+					"keyName": "store_notification_pkey",
+					"columnNames": ["id"],
+					"composite": false,
+					"constraint": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {},
+			"nativeEnums": {}
+		}
+	],
+	"nativeEnums": {}
+}
