@@ -296,6 +296,9 @@ module.exports = defineConfig({
 		workerMode: WORKER_MODE || 'shared',
 		databaseUrl: process.env.DATABASE_URL,
 		databaseDriverOptions: {
+			connection: {
+				ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+			},
 			pool: {
 				max: DATABASE_POOL_MAX,
 				idleTimeoutMillis: 30000,

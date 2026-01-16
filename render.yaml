@@ -2,6 +2,7 @@ services:
   - type: web
     name: utech-medusa-server
     env: node
+    region: singapore
     plan: free
     buildCommand: yarn install --production=false && yarn build
     startCommand: yarn start
